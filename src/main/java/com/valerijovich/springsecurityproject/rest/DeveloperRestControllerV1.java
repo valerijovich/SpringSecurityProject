@@ -1,6 +1,7 @@
-package com.valerijovich.springsecurityproject.controller;
+package com.valerijovich.springsecurityproject.rest;
 
 import com.valerijovich.springsecurityproject.model.Developer;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,27 +22,31 @@ public class DeveloperRestControllerV1 {
 
     // создаём эндпоинт для получения списка всех разработчиков
     @GetMapping
+    @PreAuthorize("hasAuthority('developers:read')")
     public List<Developer> getAll() {
         return DEVELOPERS;
     }
 
-    // создаём эндпоинт для получения одного конкретного разработчика по его айди
+    // создаём эндпоинт для получения одного конкретного разработчика по его id
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('developers:read')")
     public Developer getById(@PathVariable Long id) {
         return DEVELOPERS.stream().filter(developer -> developer.getId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
-    // получение нового разработчика из пост запроса и добавление его в коллекцию
+    // получение нового разработчика из POST запроса и добавление его в коллекцию
     @PostMapping
+    @PreAuthorize("hasAuthority('developers:write')")
     public Developer create(@RequestBody Developer developer) {
         this.DEVELOPERS.add(developer);
         return developer;
     }
 
-    // удаление разработчика по указанному айди
+    // удаление разработчика по указанному id
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('developers:write')")
     public void deleteById(@PathVariable Long id) {
         this.DEVELOPERS.removeIf(developer -> developer.getId().equals(id));
     }
