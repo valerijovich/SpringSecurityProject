@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-// фильтр, который будет пропускать через себя запросы
+// фильтр, который пропускает через себя запросы
 @Component
 public class JwtTokenFilter extends GenericFilterBean {
 

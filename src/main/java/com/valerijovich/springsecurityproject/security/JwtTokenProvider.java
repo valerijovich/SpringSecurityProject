@@ -27,11 +27,11 @@ public class JwtTokenProvider {
         this.userDetailsService = userDetailsService;
     }
 
-    @Value("${jwt.secret")
+    @Value("${jwt.secret}")
     private String secreteKey;
-    @Value("${jwt.header")
+    @Value("${jwt.header}")
     private String authorizationHeader;
-    @Value("${jwt.expiration")
+    @Value("${jwt.expiration}")
     private Long validityInMilliseconds;
 
     // для безопасности переопределяем метод init
